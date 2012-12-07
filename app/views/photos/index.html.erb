@@ -1,7 +1,15 @@
 <h1>Listing photos</h1>
 
+
+<%= form_for :photo, :url => photos_path, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :photo %>
+  <%= form.submit %>
+<% end %>
+
+
 <table>
   <tr>
+    <th></th>
     <th>Photo file name</th>
     <th></th>
     <th></th>
@@ -10,6 +18,7 @@
 
 <% @photos.each do |photo| %>
   <tr>
+    <td><%= image_tag photo.photo.url(:thumb) %></td>
     <td><%= photo.photo_file_name %></td>
     <td><%= link_to 'Show', photo %></td>
     <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
@@ -19,5 +28,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Photo', new_photo_path %>
